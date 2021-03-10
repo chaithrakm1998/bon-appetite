@@ -4,7 +4,7 @@ import Header from "./Header";
 import Foods from "./food";
 import Search from "./Search";
 
-const FOOD_API_URL="https://www.omdbapi.com/?s=man&apikey=4a3b711b";
+const FOOD_API_URL="https://api.edamam.com/search?q=4e9f05eb9b904d703fa0d46a88ce1ac63f29f498"
 
 const initialState = {
   loading: true,
@@ -57,8 +57,10 @@ const App = () => {
     	dispatch({
       	type: "SEARCH_FOODS_REQUEST"
     	});
+      const APP_ID = "4e9f05eb";
+  const APP_KEY = "9b904d703fa0d46a88ce1ac63f29f498";
 	
-      fetch(`https://www.omdbapi.com/?s=${searchValue}&apikey=4a3b711b`)
+      fetch("https://api.edamam.com/search?q=&app_id=${APP_ID}&app_key=${APP_KEY}")
       	.then(response => response.json())
       	.then(jsonResponse => {
         	if (jsonResponse.Response === "True") {
@@ -77,6 +79,11 @@ const App = () => {
     
 
     const { food, errorMessage, loading } = state;
+    
+
+  
+
+    
 
     return (
     <div className="App">
@@ -90,7 +97,7 @@ const App = () => {
           <div className="errorMessage">{errorMessage}</div>
         ) : (
           food.map((food, index) => (
-            <Foods key={`${index}-${food.Title}`} food={food} />
+            <Foods key={`${index}-${food.title}`} food={food} />
           ))
         )}
       </div>
